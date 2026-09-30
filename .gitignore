@@ -1,0 +1,9 @@
+.env
+canteen_ai.db
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+.env
+__pycache__/
+*.db
