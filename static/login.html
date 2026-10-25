@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="vi">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0f766e"><title>Đăng nhập - Canteen AI</title><link rel="stylesheet" href="/static/style.css"><link rel="icon" href="/static/favicon.svg"></head>
+<body class="auth-page">
+<header class="auth-top"><div class="auth-top-brand"><div class="auth-top-mark">🍱</div><span>CANTEEN<span style="color:#14b8a6">AI</span></span></div><small>Hệ thống quản lý căng tin trường học</small></header>
+<main class="auth-screen">
+<section class="auth-visual"><div class="auth-food">🍜</div><div class="eyebrow dark">SCHOOL CANTEEN PLATFORM</div><h1>Ăn ngon hơn.<br><span>Quản lý thông minh hơn.</span></h1><p>Đăng nhập để khám phá thực đơn, đặt món, theo dõi đơn hàng và sử dụng trợ lý AI của Canteen AI.</p><div class="auth-points"><span>🍽 Thực đơn thông minh</span><span>🤖 Trợ lý AI</span><span>📦 Quản lý kho</span></div></section>
+<section class="auth-card"><div class="auth-brand">🍱 <b>CANTEEN<span>AI</span></b></div><h2>Chào mừng trở lại!</h2><p>Đăng nhập vào tài khoản của bạn để tiếp tục.</p><p id="msg" class="auth-notice auth-message"></p>
+<label>Email</label><div class="input-wrap">✉️<input id="email" type="email" placeholder="Nhập email"></div>
+<label>Mật khẩu</label><div class="input-wrap">🔒<input id="password" type="password" placeholder="Nhập mật khẩu"></div>
+<button id="loginBtn" type="button" class="primary-btn full" onclick="loginPage()">Đăng nhập <span>→</span></button>
+<p class="auth-link">Chưa có tài khoản? <a href="/register">Đăng ký ngay</a></p>
+<div id="demoCredentials" class="demo-box" hidden></div>
+</section></main>
+<script>const msg=document.getElementById('msg');const params=new URLSearchParams(location.search);if(params.get('expired')){msg.textContent='Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.';msg.hidden=false;}async function loginPage(){const btn=document.getElementById('loginBtn');btn.disabled=true;msg.textContent='';msg.hidden=true;try{const r=await fetch('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:document.getElementById('email').value.trim(),password:document.getElementById('password').value})});const d=await r.json();if(!r.ok)throw Error(d.detail||'Đăng nhập thất bại');localStorage.token=d.access_token;location.href='/';}catch(e){msg.textContent=e.message;msg.hidden=false;}finally{btn.disabled=false}}async function loadDemoCredentials(){try{const r=await fetch('/api/auth/demo-credentials');if(!r.ok)return;const data=await r.json();const box=document.getElementById('demoCredentials');const title=document.createElement('strong');title.textContent='🔑 Tài khoản demo';box.replaceChildren(title,...data.accounts.map(account=>{const item=document.createElement('small');item.textContent=`${account.role}: ${account.email} / ${account.password}`;return item}));box.hidden=false;}catch(e){}}loadDemoCredentials();</script>
+</body></html>
