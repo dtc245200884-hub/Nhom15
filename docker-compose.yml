@@ -1,3 +1,78 @@
+# ============================================================
+# CANTEENAI - HE THONG QUAN LY CANG TIN TRUONG HOC TICH HOP AI
+# ============================================================
+#
+# Du an: CanteenAI - Nhom 15
+# Nen tang: Python, FastAPI, Docker, Docker Compose
+#
+# MUC DICH:
+# Docker Compose giup dong goi va khoi dong ung dung CanteenAI
+# trong container, giup trien khai nhat quan tren nhieu may.
+#
+# CAU TRUC HE THONG:
+# - Dockerfile: Huong dan xay dung Docker image.
+# - docker-compose.yml: Quan ly dich vu va cau hinh container.
+# - main.py: Diem khoi dong ung dung FastAPI.
+# - database.py: Ket noi va quan ly co so du lieu.
+# - requirements.txt: Danh sach thu vien Python.
+#
+# CAC THANH PHAN CAU HINH:
+#
+# 1. SERVICES
+#    Dinh nghia dich vu canteen-ai.
+#
+# 2. BUILD
+#    Xay dung Docker image tu Dockerfile trong thu muc hien tai.
+#
+# 3. ENV_FILE
+#    Doc bien moi truong tu file .env.
+#    Khong dua mat khau va API key that len GitHub.
+#
+# 4. ENVIRONMENT
+#    Cau hinh duong dan SQLite va che do ghi log Python.
+#
+# 5. PORTS
+#    Cong 8001 tren may ket noi cong 8000 trong container.
+#    Truy cap: http://127.0.0.1:8001
+#
+# 6. VOLUMES
+#    Luu du lieu SQLite trong Docker volume canteen_data.
+#    Giup duy tri du lieu khi container duoc tao lai.
+#
+# 7. RESTART
+#    Tu dong khoi dong lai container theo chinh sach
+#    unless-stopped.
+#
+# 8. HEALTHCHECK
+#    Kiem tra API /api/health de theo doi tinh trang dich vu.
+#
+# ============================================================
+# HUONG DAN SU DUNG
+# ============================================================
+#
+# Kiem tra cau hinh:
+#   docker compose config
+#
+# Xay dung va khoi dong:
+#   docker compose up -d --build
+#
+# Kiem tra container:
+#   docker compose ps
+#
+# Xem nhat ky:
+#   docker compose logs -f
+#
+# Dung va xoa container:
+#   docker compose down
+#
+# Khoi dong lai:
+#   docker compose restart
+#
+# LUU Y:
+# Khong dung docker compose down -v neu muon giu du lieu.
+# Can co Docker Desktop va file .env phu hop de chay du an.
+#
+# ============================================================
 services:
   canteen-ai:
     build:
@@ -23,3 +98,4 @@ services:
 
 volumes:
   canteen_data:
+
