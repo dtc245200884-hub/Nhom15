@@ -20,7 +20,7 @@ On branch main
 nothing to commit, working tree clean
 thì dự án đang ở trạng thái bình thường.
 Tiếp theo kiểm tra các file quan trọng và khởi động dự án CanteenAI:
-Lệnh	Chức năng
+Lệnh	                   Chức năng
 Test-Path .\start.bat	  Kiểm tra file khởi động start.bat có tồn tại không.
 Test-Path .\main.py	    Kiểm tra file Python chính của ứng dụng có tồn tại không.
 Test-Path .\run.ps1	    Kiểm tra file PowerShell dùng để chạy dự án có tồn tại không.
