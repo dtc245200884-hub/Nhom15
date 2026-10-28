@@ -1,81 +1,68 @@
-# CANTEEN AI — NHÓM 15
+# Hướng dẫn chạy và chạy lại CanteenAI — Nhóm 15
 
-## Chạy nhanh trên Windows
+## 1. Sau khi khởi động lại Windows
 
-**Cách dễ nhất:** mở thư mục này và nhấp đúp `start.bat`. Lần đầu cần Internet để cài thư viện; các lần sau thường chỉ mất vài giây.
-
-Nếu Windows hỏi xác nhận mở tệp, chọn **Run / Open** nếu bạn tin cậy nguồn tệp. Nếu cửa sổ báo lỗi, không đóng cửa sổ; chụp hoặc sao chép phần lỗi để kiểm tra.
-
-### Chạy bằng PowerShell
-
-Mở PowerShell tại thư mục `cangtinai_code` và chạy:
+1. Mở thư mục dự án chứa `start.bat` và `main.py`.
+2. Nhấp đúp **`start.bat`** (hoặc mở PowerShell trong thư mục đó và chạy lệnh bên dưới).
+3. Giữ cửa sổ PowerShell mở trong lúc sử dụng.
+4. Mở **http://127.0.0.1:8000/**. Tài liệu API: **http://127.0.0.1:8000/docs**.
+5. Để tắt: nhấn **Ctrl+C** tại cửa sổ đang chạy.
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\run.ps1
 ```
 
-Nếu đang dùng PowerShell 7, có thể dùng `pwsh` thay cho `powershell`:
+**Lần đầu:** cần cài Python 3.11+ và có Internet để cài các thư viện trong `requirements.txt`. Script tạo `.venv`, tạo `.env` từ `.env.example` và sinh `SECRET_KEY` mới nếu `.env` chưa tồn tại. **Lần sau:** script dùng lại môi trường và giữ nguyên `.env`, không cài lại thư viện nếu `requirements.txt` không đổi.
+
+**Dữ liệu:** cấu hình `DATABASE_URL` trong `.env` quyết định nơi lưu database. Mặc định dùng `sqlite:///./canteen_ai.db` tại thư mục dự án. Script **không tự tìm hoặc chuyển sang database cũ** trong Downloads; nếu bạn cần dữ liệu cũ, sao lưu và chỉnh `DATABASE_URL` một cách chủ động. Không xóa `.env`, database hoặc `.venv` khi chỉ muốn chạy lại.
+
+## 2. Chạy bằng Docker Desktop (lựa chọn khác)
+
+Mở Docker Desktop, đợi engine sẵn sàng; tạo `.env` từ `.env.example` nếu chưa có và **thay `SECRET_KEY=replace-me` bằng một chuỗi bí mật đủ mạnh**. Sau đó chạy:
 
 ```powershell
-pwsh -NoProfile -ExecutionPolicy Bypass -File .\run.ps1
+docker compose up -d --build
+docker compose ps
+docker compose logs --tail 50 canteen-ai
 ```
 
-## Mở website
+Website Docker: **http://127.0.0.1:8001/**. Dừng container: `docker compose down`. **Không chạy `docker compose down -v`** nếu muốn giữ dữ liệu SQLite trong volume `canteen_data`. Docker dùng database trong volume riêng, không tự dùng database Windows của cách chạy PowerShell.
 
-- Website: http://127.0.0.1:8000/
-- API Docs: http://127.0.0.1:8000/docs
-
-Khi thấy `Uvicorn running` và `Application startup complete`, website đã chạy. Giữ cửa sổ khởi động mở. Nhấn `Ctrl+C` để dừng.
-
-## Lần đầu và các lần sau
-
-- Lần đầu: script tự tạo `.venv`, tạo `.env` nếu chưa có và cài thư viện. Có thể mất vài phút.
-- Lần sau: script dùng lại `.venv` và bỏ qua cài thư viện nếu `requirements.txt` không thay đổi.
-- Không cần tự kích hoạt môi trường ảo và không cần chạy `pip install` thủ công.
-
-## Dữ liệu và cấu hình
-
-- Script không ghi đè `.env` nếu file đã tồn tại.
-- Khi tạo `.env` mới, script tự tạo `SECRET_KEY` ngẫu nhiên.
-- Nếu phát hiện `Downloads\group15v5\canteen_ai.db`, script sẽ cấu hình dùng database đó **chỉ khi tạo `.env` lần đầu**.
-- Không xóa hoặc di chuyển `.env`, `canteen_ai.db` hay bản sao lưu nếu chưa biết chắc chúng không còn cần thiết. Nếu dữ liệu cũ không hiện ra, kiểm tra `DATABASE_URL` trong `.env`.
-- ZIP không chứa `.env`, mật khẩu, database cá nhân hoặc môi trường `.venv`.
-
-## Tài khoản demo
-
-Nếu cơ sở dữ liệu mới được tạo, ứng dụng có tài khoản demo:
-
-| Vai trò | Email | Mật khẩu |
-|---|---|---|
-| Quản trị viên | `admin@school.vn` | `Admin@123` |
-| Nhân viên | `staff@school.vn` | `Staff@123` |
-| Sinh viên | `student@school.vn` | `Student@123` |
-
-Nếu dùng database cũ, tài khoản phụ thuộc vào dữ liệu đã lưu trong database đó.
-
-## AI (không bắt buộc để khởi động)
-
-Để gọi Gemini thật, thêm API key vào `GEMINI_API_KEY` trong `.env`. Không chia sẻ file `.env` và không đưa API key lên GitHub. Nếu chưa có key, các chức năng AI có thể sử dụng chế độ dự phòng tùy chức năng.
-
-## Sửa lỗi nhanh
-
-**Không tìm thấy `run.ps1`:** đảm bảo PowerShell đang ở đúng thư mục chứa `run.ps1`, `main.py` và `requirements.txt`.
-
-**Lỗi cổng 8000 đang được sử dụng:** dừng phiên bản cũ bằng `Ctrl+C` ở cửa sổ đang chạy, sau đó mở lại `start.bat`.
-
-**Cài thư viện lỗi:** kiểm tra kết nối Internet rồi chạy lại `start.bat`. Không xóa `.env` hoặc database để thử sửa lỗi.
-
-**Website không mở:** đợi đến khi log hiện `Application startup complete`; nếu có thông báo lỗi màu đỏ, giữ lại toàn bộ thông báo để kiểm tra.
-
-## Kiểm tra tùy chọn
-
-Sau khi cài thư viện thành công, có thể chạy trong PowerShell:
+## 3. Kiểm tra trước khi demo hoặc upload GitHub
 
 ```powershell
-.\.venv\Scripts\python.exe .\smoke_check.py
+python .\check_project.py
+python .\smoke_check.py
+git status
+git branch --show-current
 ```
 
-Kết quả mong đợi: `SMOKE_CHECK_OK`.
+`PROJECT_CHECK_OK` và `SMOKE_CHECK_OK` là các **kiểm tra tĩnh**, không chứng minh tất cả API hoặc Docker đã chạy thành công. Để xác nhận runtime, khởi động ứng dụng rồi kiểm tra `/api/health`, đăng nhập, đặt món và các chức năng cần trình diễn.
 
----
-*Hướng dẫn dành cho chạy demo trên máy cá nhân Windows; chưa thay thế cấu hình bảo mật khi triển khai production.*
+Chỉ commit những tệp đã kiểm tra; **không dùng `git add .` khi có tệp sao lưu chưa theo dõi**. Ví dụ trên nhánh `canteenai-upload`:
+
+```powershell
+git switch canteenai-upload
+git add README.md HUONG_DAN_CHAY.md run.ps1 check_project.py
+git diff --cached --name-only
+git commit -m "Simplify startup and refresh run guide"
+git push origin canteenai-upload
+```
+
+## 4. Lỗi thường gặp
+
+- **Không tìm thấy Python:** cài Python 3.11+ và mở PowerShell mới.
+- **Cổng 8000 đã sử dụng:** dừng cửa sổ web cũ bằng `Ctrl+C`.
+- **Không có thư viện:** kiểm tra Internet và chạy lại `start.bat`.
+- **Dữ liệu không như trước:** kiểm tra `DATABASE_URL` trong `.env` và bản sao lưu database; không xóa file để thử sửa lỗi.
+- **Docker không khởi động:** kiểm tra Docker Desktop, `docker compose ps`, và `docker compose logs --tail 100 canteen-ai`.
+- **AI không trả lời:** kiểm tra API key trong `.env` và kết nối mạng. Không công khai API key.
+
+## 5. Bảo mật và giới hạn
+
+Không upload `.env`, khóa API, database thật, file `.bak`, hoặc `.venv` lên GitHub. `start.bat` dùng cho demo cục bộ; Docker cũng đang chỉ mở cổng localhost. Trước khi triển khai thực tế cần cấu hình bảo mật, secret, sao lưu, kiểm thử và quản trị tài khoản phù hợp.
+
+## 6. Phụ lục và cập nhật GitHub
+
+- [Phụ lục dự án](PHU_LUC_DU_AN.md): tổng quan chức năng, kiến trúc, API và giới hạn.
+- [Hướng dẫn cập nhật GitHub](HUONG_DAN_CAP_NHAT_GITHUB.md): các bước đồng bộ ZIP vào nhánh `canteenai-upload`.

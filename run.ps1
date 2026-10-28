@@ -28,13 +28,8 @@ if (-not (Test-Path -LiteralPath '.env')) {
     $envText = Get-Content '.env' -Raw
     $envText = $envText -replace '(?m)^SECRET_KEY=.*$', "SECRET_KEY=$secret"
 
-    # Neu co database cu cua bai tap thi su dung no, tranh tao mot database trong suot moi.
-    $legacyDb = Join-Path $env:USERPROFILE 'Downloads\group15v5\canteen_ai.db'
-    if (Test-Path -LiteralPath $legacyDb) {
-        $dbUrl = 'DATABASE_URL=sqlite:///' + ($legacyDb -replace '\\','/')
-        $envText = $envText -replace '(?m)^DATABASE_URL=.*$', $dbUrl
-        Write-Host '[INFO] Da phat hien database cu; se giu nguyen file du lieu nay.' -ForegroundColor Green
-    }
+    # Khong tu dong tro sang database o thu muc Downloads khac.
+    # Du lieu hien tai duoc xac dinh boi DATABASE_URL trong .env.
     $envText | & $python -c "import sys; from pathlib import Path; Path('.env').write_text(sys.stdin.read(), encoding='utf-8')"
     if ($LASTEXITCODE -ne 0) { throw 'Khong tao duoc file .env.' }
     Write-Host '[2/4] Da tao cau hinh .env lan dau.' -ForegroundColor Green
@@ -58,5 +53,6 @@ Write-Host '[4/4] Dang khoi dong may chu...' -ForegroundColor Green
 Write-Host 'Website : http://127.0.0.1:8000/' -ForegroundColor Cyan
 Write-Host 'API Docs: http://127.0.0.1:8000/docs' -ForegroundColor Cyan
 Write-Host 'Nhan Ctrl+C de dung website.' -ForegroundColor DarkGray
-Start-Job -ScriptBlock { Start-Sleep -Seconds 2; Start-Process 'http://127.0.0.1:8000/' } | Out-Null
+# Mo trinh duyet thu cong neu can; tranh tao job nen khong duoc don dep.
 & $python -m uvicorn main:app --host 127.0.0.1 --port 8000 --reload
+if ($LASTEXITCODE -ne 0) { throw 'May chu dung voi loi. Xem thong bao o tren.' }
