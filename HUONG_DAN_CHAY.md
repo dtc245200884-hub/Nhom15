@@ -2,7 +2,27 @@
 
 ## 1. Sau khi khởi động lại Windows
 
-1. Mở thư mục dự án chứa `start.bat` và `main.py`.
+**Đường dẫn dự án chính trên máy này:**
+
+```text
+C:\Users\admin\Downloads\CanteenAI_EasyStart_Test\cangtinai_code
+```
+
+Mở PowerShell ở bất kỳ vị trí nào, sau đó chạy:
+
+```powershell
+cd "C:\Users\admin\Downloads\CanteenAI_EasyStart_Test\cangtinai_code"
+Test-Path .\start.bat
+Test-Path .\main.py
+Test-Path .\run.ps1
+.\start.bat
+```
+
+Ba lệnh `Test-Path` phải trả về `True`. Nếu đang ở `PS C:\Users\admin>` mà chạy thẳng `.\start.bat`, PowerShell sẽ báo không tìm thấy tệp. **Không sử dụng đường dẫn Group K5, Group V5 hoặc thư mục giải nén tạm để chạy web.**
+
+### Cách chạy khác
+
+1. Vào thư mục dự án chính ở trên bằng File Explorer.
 2. Nhấp đúp **`start.bat`** (hoặc mở PowerShell trong thư mục đó và chạy lệnh bên dưới).
 3. Giữ cửa sổ PowerShell mở trong lúc sử dụng.
 4. Mở **http://127.0.0.1:8000/**. Tài liệu API: **http://127.0.0.1:8000/docs**.
@@ -18,7 +38,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\run.ps1
 
 ## 2. Chạy bằng Docker Desktop (lựa chọn khác)
 
-Mở Docker Desktop, đợi engine sẵn sàng; tạo `.env` từ `.env.example` nếu chưa có và **thay `SECRET_KEY=replace-me` bằng một chuỗi bí mật đủ mạnh**. Sau đó chạy:
+Mở PowerShell tại thư mục dự án chính, mở Docker Desktop, đợi engine sẵn sàng; tạo `.env` từ `.env.example` nếu chưa có và **thay `SECRET_KEY=replace-me` bằng một chuỗi bí mật đủ mạnh**. Sau đó chạy:
 
 ```powershell
 docker compose up -d --build
@@ -66,3 +86,11 @@ Không upload `.env`, khóa API, database thật, file `.bak`, hoặc `.venv` l�
 
 - [Phụ lục dự án](PHU_LUC_DU_AN.md): tổng quan chức năng, kiến trúc, API và giới hạn.
 - [Hướng dẫn cập nhật GitHub](HUONG_DAN_CAP_NHAT_GITHUB.md): các bước đồng bộ ZIP vào nhánh `canteenai-upload`.
+
+## 7. Phân biệt đường dẫn Windows và GitHub
+
+- Thư mục chạy trên máy: `C:\Users\admin\Downloads\CanteenAI_EasyStart_Test\cangtinai_code`.
+- Repository: https://github.com/dtc245200884-hub/Nhom15
+- Nhánh mã nguồn đang sử dụng: `canteenai-upload`.
+- File ZIP là bản đóng gói để sao lưu hoặc chuyển máy, **không phải thư mục chạy chính** sau khi đã cập nhật vào repository.
+- Nếu đổi máy hoặc di chuyển thư mục, cần thay đường dẫn `cd` trong tài liệu. `start.bat` và `run.ps1` vẫn chạy theo thư mục chứa script, không phụ thuộc tên thư mục bên ngoài.

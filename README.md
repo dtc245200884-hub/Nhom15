@@ -6,10 +6,26 @@ Dự án xây dựng hệ thống quản lý căng tin với **FastAPI (Python)*
 
 > **Xem phụ lục dự án:** [PHU_LUC_DU_AN.md](PHU_LUC_DU_AN.md) — tóm tắt mục tiêu, chức năng, kiến trúc, cấu trúc mã nguồn, API, kiểm tra và giới hạn triển khai.
 
+## Thư mục dự án chính trên máy Windows
+
+Thư mục được thống nhất cho máy đang sử dụng:
+
+```text
+C:\Users\admin\Downloads\CanteenAI_EasyStart_Test\cangtinai_code
+```
+
+Đây là **đường dẫn cục bộ trên máy người thực hiện**, không phải địa chỉ website công khai. Người tải repository sang máy khác cần thay đường dẫn tương ứng; script `start.bat` tự xác định vị trí của chính nó.
+
 ## Khởi động nhanh sau khi bật lại máy Windows
 
-1. Mở thư mục dự án chứa `start.bat` và `main.py`.
-2. Nhấp đúp **`start.bat`**, hoặc mở PowerShell trong thư mục dự án và chạy:
+1. Mở PowerShell và chuyển đến thư mục dự án chính:
+
+   ```powershell
+   cd "C:\Users\admin\Downloads\CanteenAI_EasyStart_Test\cangtinai_code"
+   ```
+
+   Kiểm tra `Test-Path .\start.bat` trả về `True`.
+2. Chạy **`.\start.bat`** trong PowerShell (hoặc nhấp đúp `start.bat` trong File Explorer). Có thể dùng lệnh tương đương:
 
    ```powershell
    powershell -NoProfile -ExecutionPolicy Bypass -File .\run.ps1

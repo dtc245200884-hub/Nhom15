@@ -134,3 +134,7 @@ Các kết quả `PROJECT_CHECK_OK`, `SMOKE_CHECK_OK` chỉ phản ánh kiểm t
 ## 9. Hướng phát triển
 
 Các hướng có thể xem xét sau khi kiểm thử thực tế: bổ sung bộ kiểm thử tự động, cải thiện quan sát/log, hoàn thiện sao lưu và khôi phục dữ liệu, nâng cao bảo mật và triển khai CI/CD. Đây là **đề xuất**, không phải tính năng đã triển khai.
+
+## Thống nhất vị trí chạy và bàn giao
+
+Trên máy phát triển hiện tại, repository được chạy tại `C:\Users\admin\Downloads\CanteenAI_EasyStart_Test\cangtinai_code`. Đây là đường dẫn cục bộ để thao tác PowerShell và Git, không phải cấu hình cố định trong mã nguồn. Các tệp khởi động tự xác định thư mục chứa script. Xem [Hướng dẫn chạy](HUONG_DAN_CHAY.md) và [Hướng dẫn cập nhật GitHub](HUONG_DAN_CAP_NHAT_GITHUB.md).

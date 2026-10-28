@@ -4,7 +4,7 @@
 
 ## 1. Giải nén ZIP
 
-Giải nén `CanteenAI_Nhom15_ThongNhat_GitHub.zip`. Bên trong có thư mục `cangtinai_code` chứa toàn bộ mã nguồn.
+Giải nén `CanteenAI_Nhom15_DuongDanChinh_ThongNhat.zip`. Bên trong có thư mục `cangtinai_code` chứa toàn bộ mã nguồn.
 
 ## 2. Sao chép có chọn lọc vào repository đang dùng
 
@@ -13,9 +13,11 @@ Mở PowerShell trong thư mục repository hiện tại:
 ```powershell
 cd "C:\Users\admin\Downloads\CanteenAI_EasyStart_Test\cangtinai_code"
 git switch canteenai-upload
+Get-Location
+Test-Path .\start.bat
 ```
 
-Sao chép từ thư mục giải nén vào đây **những tệp được cập nhật**: `README.md`, `HUONG_DAN_CHAY.md`, `run.ps1`, `.gitignore`, `check_project.py`, `PHU_LUC_DU_AN.md`, `HUONG_DAN_CAP_NHAT_GITHUB.md`. Không chép đè `.env`, database, `.venv`; không cần chép đè `main.py` hoặc các thư mục nghiệp vụ nếu chúng không đổi.
+Sao chép từ thư mục giải nén vào đây **những tệp được cập nhật**: `README.md`, `HUONG_DAN_CHAY.md`, `HUONG_DAN_CAP_NHAT_GITHUB.md`, `PHU_LUC_DU_AN.md`. Không chép đè `.env`, database, `.venv`; không cần chép đè `main.py` hoặc các thư mục nghiệp vụ nếu chúng không đổi.
 
 Để kiểm tra vị trí thư mục giải nén:
 
@@ -39,9 +41,9 @@ Nếu hai lệnh `Test-Path` trả về `False`, bạn chưa sao chép đúng th
 ## 4. Commit và push
 
 ```powershell
-git add README.md HUONG_DAN_CHAY.md run.ps1 .gitignore check_project.py PHU_LUC_DU_AN.md HUONG_DAN_CAP_NHAT_GITHUB.md
+git add README.md HUONG_DAN_CHAY.md HUONG_DAN_CAP_NHAT_GITHUB.md PHU_LUC_DU_AN.md
 git diff --cached --name-only
-git commit -m "Unify CanteenAI run guide and project appendix"
+git commit -m "Standardize canonical Windows project path and run docs"
 git push origin canteenai-upload
 ```
 
@@ -50,3 +52,13 @@ Nếu `git status` hiển thị `nothing to commit`, chưa có thay đổi để
 ## 5. Xác nhận trên GitHub
 
 Mở nhánh `canteenai-upload` trên repository và kiểm tra `README.md`, `PHU_LUC_DU_AN.md`, `HUONG_DAN_CHAY.md` xuất hiện ở thư mục gốc. GitHub tự hiển thị README ngay dưới danh sách tệp; liên kết đến phụ lục nằm ở đầu README.
+
+## 6. Thư mục chính duy nhất
+
+Luôn thực hiện `git status`, `git commit` và `git push` từ:
+
+```text
+C:\Users\admin\Downloads\CanteenAI_EasyStart_Test\cangtinai_code
+```
+
+Không commit từ thư mục giải nén ZIP tạm. Không cần chỉnh `start.bat` hay `run.ps1` để hard-code đường dẫn: hai file này đã chạy theo thư mục chứa chúng.
