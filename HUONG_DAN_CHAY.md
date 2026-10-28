@@ -5,20 +5,29 @@
 **Đường dẫn dự án chính trên máy này:**
 
 ```text
-C:\Users\admin\Downloads\CanteenAI_EasyStart_Test\cangtinai_code
+ "C:\Users\admin\Downloads\CanteenAI_EasyStart_Test\cangtinai_code"
 ```
 
 Mở PowerShell ở bất kỳ vị trí nào, sau đó chạy:
 
 ```powershell
 cd "C:\Users\admin\Downloads\CanteenAI_EasyStart_Test\cangtinai_code"
-Test-Path .\start.bat
-Test-Path .\main.py
-Test-Path .\run.ps1
-.\start.bat
+Kiểm tra Git:
+git status
+git branch --show-current
+Nếu thấy:
+On branch main
+nothing to commit, working tree clean
+thì dự án đang ở trạng thái bình thường.
+Tiếp theo kiểm tra các file quan trọng và khởi động dự án CanteenAI:
+Lệnh	Chức năng
+Test-Path .\start.bat	  Kiểm tra file khởi động start.bat có tồn tại không.
+Test-Path .\main.py	    Kiểm tra file Python chính của ứng dụng có tồn tại không.
+Test-Path .\run.ps1	    Kiểm tra file PowerShell dùng để chạy dự án có tồn tại không.
+.\start.bat	            Thực thi file start.bat để khởi động CanteenAI.
 ```
 
-Ba lệnh `Test-Path` phải trả về `True`. Nếu đang ở `PS C:\Users\admin>` mà chạy thẳng `.\start.bat`, PowerShell sẽ báo không tìm thấy tệp. **Không sử dụng đường dẫn Group K5, Group V5 hoặc thư mục giải nén tạm để chạy web.**
+Ba lệnh `Test-Path` phải trả về `True`. Nếu đang ở `PS C:\Users\admin>` mà chạy thẳng `.\start.bat`, PowerShell sẽ báo không tìm thấy tệp. 
 
 ### Cách chạy khác
 
