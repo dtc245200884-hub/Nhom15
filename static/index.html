@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0f766e">
+  <title>Canteen AI — Nhóm 15</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/premium.css">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">🍱</div>
+        <div><strong>CANTEEN<span>AI</span></strong><small>School Food Platform</small></div>
+      </div>
+      <div class="profile-mini">
+        <div class="avatar" id="avatar">NA</div>
+        <div><strong id="sideName">Nguyễn Văn A</strong><small id="sideRole">student</small></div>
+      </div>
+      <nav class="side-nav">
+        <button class="nav-item active" data-tab="menu" data-csp-event="click" data-csp-action="tab-menu"><span>🏠</span> Tổng quan</button>
+        <button class="nav-item" data-tab="orders" data-csp-event="click" data-csp-action="tab-orders"><span>🧾</span> Đơn hàng</button>
+        <button class="nav-item" data-tab="ai" data-csp-event="click" data-csp-action="tab-ai"><span>✨</span> Trợ lý AI</button>
+        <button class="nav-item" id="dashboardTab" data-tab="dashboard" data-csp-event="click" data-csp-action="tab-dashboard"><span>📊</span> Phân tích</button>
+        <button class="nav-item" data-tab="notifications" data-csp-event="click" data-csp-action="tab-notifications"><span>🔔</span> Thông báo <em id="badge"></em></button>
+        <div class="nav-label">QUẢN TRỊ</div>
+        <button id="manageBtn" class="nav-item" data-tab="manage" data-csp-event="click" data-csp-action="tab-manage"><span>⚙️</span> Quản lý</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="ai-status"><span class="online-dot"></span><div><strong>AI đang hoạt động</strong><small>Sẵn sàng hỗ trợ bạn</small></div></div>
+        <button class="logout-side" data-csp-event="click" data-csp-action="logout">↪ Đăng xuất</button>
+      </div>
+    </aside>
+
+    <div class="main-wrap">
+      <header class="topbar">
+        <button class="mobile-menu" data-csp-event="click" data-csp-action="sidebar-toggle">☰</button>
+        <div class="breadcrumb"><span>Canteen AI</span><b>/</b><strong id="pageLabel">Tổng quan</strong></div>
+        <div class="top-actions">
+          <button class="icon-btn" data-csp-event="click" data-csp-action="tab-notifications" title="Thông báo">🔔<span id="topBadge"></span></button>
+          <div class="user-chip"><div class="avatar small" id="topAvatar">NA</div><div><strong id="who">Nguyễn Văn A · student</strong><small>Nhóm 15</small></div></div>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <section id="app">
+          <div id="menu" class="tab">
+            <div class="welcome-hero">
+              <div><span class="eyebrow">CANTEEN SMART EXPERIENCE</span><h1>Xin chào, <span id="welcomeName">Nguyễn Văn A</span> 👋</h1><p>Khám phá thực đơn hôm nay và để AI tìm món phù hợp với bạn.</p><div class="hero-actions"><button class="primary-btn" data-csp-event="click" data-csp-action="tab-ai">✨ Hỏi AI ngay</button><button class="ghost-btn" data-csp-event="click" data-csp-action="focus-search">🔎 Tìm món</button></div></div><div class="hero-art"><div class="art-ring"></div><div class="art-emoji">🍜</div><div class="floating-card">⚡ <b>Nhanh & tiện</b><small>Đặt món trong vài giây</small></div></div>
+            </div>
+            <div class="section-head"><div><span class="eyebrow dark">MENU HÔM NAY</span><h2>Thực đơn nổi bật</h2></div><button class="text-btn" data-csp-event="click" data-csp-action="tab-orders">Xem đơn hàng →</button></div>
+            <div class="filter-bar"><div class="search-box">⌕<input id="search" placeholder="Tìm món ăn, đồ uống..." data-csp-event="input" data-csp-action="load-foods"></div><select id="catFilter" data-csp-event="change" data-csp-action="load-foods"><option value="">Tất cả danh mục</option></select><div class="price-filter"><span>₫</span><input id="maxPrice" type="number" placeholder="Giá tối đa" data-csp-event="change" data-csp-action="load-foods"></div></div>
+            <div id="foods" class="food-grid"></div>
+            <div class="cart-floating"><div><small>GIỎ HÀNG</small><strong id="cartTotal">0 món · 0 đ</strong></div><button class="primary-btn" data-csp-event="click" data-csp-action="order">🛒 Đặt món <span>→</span></button></div>
+          </div>
+
+          <div id="orders" class="tab" hidden><div class="page-intro"><div><span class="eyebrow dark">ORDERS</span><h1>Đơn hàng của bạn</h1><p>Theo dõi trạng thái và lịch sử mua hàng.</p></div><button class="ghost-btn" data-csp-event="click" data-csp-action="tab-menu">＋ Đặt món mới</button></div><div class="content-card"><div class="toolbar"><div class="toolbar-title">Danh sách đơn hàng</div><select id="statusFilter" data-csp-event="change" data-csp-action="load-orders"><option value="">Tất cả trạng thái</option><option>pending</option><option>confirmed</option><option>preparing</option><option>ready</option><option>completed</option><option>cancelled</option></select></div><div id="orderList"></div></div></div>
+
+          <div id="ai" class="tab" hidden><div class="ai-hero"><div><span class="eyebrow">CANTEEN AI COPILOT</span><h1>Trợ lý AI của bạn</h1><p>Hỏi về món ăn, tồn kho, nhu cầu chuẩn bị hoặc nhận gợi ý theo dữ liệu căng tin.</p></div><div class="ai-orb">✦</div></div><div class="ai-layout"><div class="content-card"><div class="card-title-row"><div><span class="eyebrow dark">AI TOOLS</span><h2>Công cụ thông minh</h2></div></div><div class="ai-actions"><button class="ai-action" data-csp-event="click" data-csp-action="ai-recommend"><span>🍽️</span><div><b>Gợi ý món</b><small>Phù hợp với nhu cầu và ngân sách</small></div>→</button><button id="forecastBtn" class="ai-action" data-csp-event="click" data-csp-action="ai-forecast"><span>📈</span><div><b>Dự báo nhu cầu</b><small>Hỗ trợ nhân viên chuẩn bị món</small></div>→</button></div><label class="field-label">Câu hỏi của bạn</label><textarea id="question" placeholder="Ví dụ: Gợi ý món dưới 30.000đ, món nào sắp hết, hôm nay nên chuẩn bị món gì?"></textarea><button class="primary-btn" data-csp-event="click" data-csp-action="ai-chat">✨ Hỏi AI</button></div><div class="content-card ai-answer-card"><div class="answer-head"><span class="ai-mini">✦</span><div><b>AI Assistant</b><small>Phản hồi dựa trên dữ liệu hệ thống</small></div><span class="live-pill">LIVE</span></div><pre id="answer">Xin chào! Tôi sẵn sàng hỗ trợ bạn về căng tin.</pre></div></div></div>
+
+          <div id="dashboard" class="tab" hidden><div class="page-intro"><div><span class="eyebrow dark">ANALYTICS</span><h1>Trung tâm phân tích</h1><p>Theo dõi hiệu quả vận hành và doanh thu của căng tin.</p></div></div><div id="stats" class="stats-grid"></div><div class="analytics-grid"><div class="content-card"><div class="card-title-row"><h2>Trạng thái đơn hàng</h2></div><div id="statusStats" class="status-grid"></div></div><div class="content-card"><div class="card-title-row"><h2>Top món bán chạy</h2></div><div id="topFoods"></div></div></div><div class="content-card"><div class="card-title-row"><h2>Doanh thu 7 ngày</h2><span class="muted">Cập nhật từ hệ thống</span></div><div id="salesReport"></div></div></div>
+
+          <div id="manage" class="tab" hidden><div class="page-intro"><div><span class="eyebrow dark">MANAGEMENT</span><h1>Quản trị căng tin</h1><p>Quản lý món ăn, kho, thực đơn và tài khoản.</p></div></div><div class="content-card"><div class="manage-tabs"><button class="manage-tab active" data-csp-event="click" data-csp-action="manage-foods">🍽 Món ăn</button><button class="manage-tab" data-csp-event="click" data-csp-action="manage-categories">▦ Danh mục</button><button class="manage-tab" data-csp-event="click" data-csp-action="manage-ingredients">📦 Kho nguyên liệu</button><button class="manage-tab" data-csp-event="click" data-csp-action="manage-menus">📅 Thực đơn ngày</button><button id="usersTab" class="manage-tab" data-csp-event="click" data-csp-action="manage-users">👥 Người dùng</button></div><div id="manageContent"></div></div></div>
+
+          <div id="notifications" class="tab" hidden><div class="page-intro"><div><span class="eyebrow dark">NOTIFICATIONS</span><h1>Thông báo</h1><p>Cập nhật mới nhất từ hệ thống.</p></div></div><div class="content-card"><div id="notificationList"></div></div></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <div id="categoryModal" class="modal-backdrop" hidden><div class="management-modal"><button type="button" class="modal-close" data-csp-event="click" data-csp-action="close-category">×</button><span class="eyebrow dark">CATEGORY MANAGEMENT</span><h2 id="categoryModalTitle">Thêm danh mục mới</h2><p>Nhập thông tin danh mục món ăn để hiển thị và quản lý trong hệ thống.</p><label>Tên danh mục</label><input id="categoryNameInput" class="modal-input" placeholder="Ví dụ: Món chính, Đồ uống..."><label>Mô tả</label><textarea id="categoryDescInput" class="modal-textarea" placeholder="Mô tả ngắn về danh mục"></textarea><div class="modal-actions"><button type="button" class="ghost-btn" data-csp-event="click" data-csp-action="close-category">Hủy</button><button type="button" id="categoryModalSubmit" class="primary-btn" data-csp-event="click" data-csp-action="save-category">Thêm danh mục</button></div></div></div>
+  <div id="actionModal" class="modal-backdrop" hidden><div class="management-modal action-modal"><button type="button" class="modal-close" data-csp-event="click" data-csp-action="close-action">×</button><div id="actionIcon" class="confirm-icon">✦</div><span id="actionEyebrow" class="eyebrow dark">THAO TÁC</span><h2 id="actionTitle">Xác nhận</h2><p id="actionMessage"></p><div id="actionFields" class="modal-fields"></div><div class="modal-actions"><button type="button" class="ghost-btn" data-csp-event="click" data-csp-action="close-action">Hủy</button><button type="button" id="actionSubmit" class="primary-btn" data-csp-event="click" data-csp-action="submit-action">Xác nhận</button></div></div></div>
+  <div id="deleteCategoryModal" class="modal-backdrop" hidden><div class="management-modal confirm-modal"><button type="button" class="modal-close" data-csp-event="click" data-csp-action="close-delete-category">×</button><div class="confirm-icon">🗑️</div><span class="eyebrow dark">XÁC NHẬN</span><h2>Xóa danh mục?</h2><p>Bạn có chắc muốn xóa danh mục <strong id="deleteCategoryName"></strong>? Hành động này không thể hoàn tác.</p><div class="modal-actions"><button type="button" class="ghost-btn" data-csp-event="click" data-csp-action="close-delete-category">Hủy</button><button type="button" class="danger-btn danger-large" data-csp-event="click" data-csp-action="delete-category">Xóa danh mục</button></div></div></div>
+  <div id="checkoutModal" class="modal-backdrop" hidden><div class="checkout-modal"><button type="button" class="modal-close" aria-label="Đóng" data-csp-event="click" data-csp-action="close-checkout">×</button><span class="eyebrow dark">CHECKOUT</span><h2>Xác nhận đơn hàng</h2><p>Kiểm tra thông tin trước khi gửi đơn.</p><div id="checkoutSummary" class="checkout-summary"></div><label>Phương thức thanh toán</label><select id="paymentMethod"><option value="cash">Tiền mặt</option><option value="transfer">Chuyển khoản</option></select><label>Ghi chú</label><textarea id="orderNote" placeholder="Ví dụ: ít cay, không hành..."></textarea><button type="button" class="primary-btn full" data-csp-event="click" data-csp-action="submit-order">Xác nhận đặt món <span>→</span></button></div></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>

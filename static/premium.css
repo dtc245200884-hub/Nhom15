@@ -1,0 +1,44 @@
+/* Canteen AI — premium visual layer. Presentation only; API and behavior stay unchanged. */
+:root{--primary:#087f72;--primary2:#10b9a7;--ink:#102a2a;--muted:#637783;--line:#e3ecec;--bg:#f5f9f8;--soft:#e8f8f4;--shadow:0 14px 38px rgba(16,42,42,.065)}
+html{scroll-padding-top:88px}
+body{background:radial-gradient(ellipse at 82% 0,rgba(16,185,167,.075),transparent 30%),radial-gradient(ellipse at 10% 80%,rgba(59,130,246,.045),transparent 28%),var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{transition:border-color .18s ease,box-shadow .18s ease,background-color .18s ease,transform .18s ease}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid rgba(16,185,167,.35);outline-offset:2px}
+.sidebar{background:rgba(255,255,255,.94);backdrop-filter:blur(18px);border-right-color:#e1ebea;box-shadow:8px 0 32px rgba(15,45,45,.025)}
+.brand-mark{background:linear-gradient(145deg,#087f72,#14b8a6 60%,#3b82f6);box-shadow:0 12px 25px rgba(8,127,114,.23)}
+.profile-mini{background:linear-gradient(135deg,#f0fbf8,#f6f9ff);border-color:#e1efec}
+.nav-item{min-height:43px;letter-spacing:.05px}
+.nav-item.active{background:linear-gradient(115deg,#087f72,#0e9f91 58%,#2873ce);box-shadow:0 12px 25px rgba(8,127,114,.2)}
+.topbar{background:rgba(255,255,255,.83);border-bottom-color:rgba(222,234,232,.9)}
+.main-content{padding-top:34px}
+.welcome-hero{background:linear-gradient(112deg,#075e56 0%,#0b8f80 47%,#2469b7 100%);box-shadow:0 25px 60px rgba(8,127,114,.19)}
+.welcome-hero:before{content:"";position:absolute;width:300px;height:300px;border:1px solid rgba(255,255,255,.11);border-radius:50%;right:90px;bottom:-230px;box-shadow:0 0 0 28px rgba(255,255,255,.025),0 0 0 58px rgba(255,255,255,.02)}
+.welcome-hero h1{line-height:1.18;letter-spacing:-1.3px}
+.hero-art{filter:saturate(1.08)}
+.section-head{margin-top:36px}
+.section-head h2,.page-intro h1{letter-spacing:-.8px}
+.filter-bar{border-color:#e4eeec;box-shadow:0 12px 32px rgba(16,42,42,.045)}
+.search-box:focus-within,.price-filter:focus-within{border-color:#6ed8c8;box-shadow:0 0 0 4px rgba(16,185,167,.09)}
+.food{border-color:#e6eeec;box-shadow:0 10px 28px rgba(16,42,42,.045)}
+.food:hover{transform:translateY(-6px);border-color:#9cddd2;box-shadow:0 22px 45px rgba(16,42,42,.11)}
+.food-visual{background:radial-gradient(circle at 50% 35%,#fff 0,#f2fbf8 45%,#e7f4f4 100%)}
+.food-visual:after{background:rgba(255,255,255,.38)}
+.food h3{letter-spacing:-.35px}
+.primary-btn{background:linear-gradient(120deg,#087f72,#10a995 58%,#256fc0);box-shadow:0 10px 22px rgba(8,127,114,.18)}
+.primary-btn:hover{filter:saturate(1.08);transform:translateY(-2px);box-shadow:0 14px 28px rgba(8,127,114,.22)}
+.ghost-btn{border-color:#dfe9e7}
+.content-card,.stats-grid>div{border-color:#e3ecea;box-shadow:0 12px 34px rgba(16,42,42,.045)}
+.content-card{border-radius:20px}
+.order{border-color:#e8efee;background:linear-gradient(120deg,#fff,#fbfefd)}
+.order:hover{border-color:#a9ddd4;box-shadow:0 8px 20px rgba(8,127,114,.05)}
+.cart-floating{background:rgba(13,35,39,.96);border:1px solid rgba(255,255,255,.12);box-shadow:0 22px 50px rgba(13,35,39,.25)}
+.ai-hero{background:linear-gradient(112deg,#075e56,#0b8f80 55%,#2569b7);box-shadow:0 20px 50px rgba(8,127,114,.14)}
+.ai-action{border-color:#e4eeec!important;border-radius:15px!important;transition:transform .2s,border-color .2s,box-shadow .2s!important}
+.ai-action:hover{transform:translateY(-3px);border-color:#9cddd2!important;box-shadow:0 12px 28px rgba(8,127,114,.08)}
+input,select,textarea{accent-color:#0e9f91}
+.modal-backdrop{backdrop-filter:blur(8px)}
+.management-modal,.checkout-modal{border:1px solid rgba(255,255,255,.7);box-shadow:0 34px 90px rgba(9,35,39,.25)}
+.toast{border:1px solid rgba(255,255,255,.1);box-shadow:0 18px 42px rgba(9,35,39,.25)}
+@media(max-width:900px){.sidebar{background:rgba(255,255,255,.98)}.main-content{padding-top:22px}}
+@media(max-width:600px){.welcome-hero{border-radius:21px}.section-head h2{font-size:22px}.cart-floating{box-shadow:0 14px 35px rgba(13,35,39,.28)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
